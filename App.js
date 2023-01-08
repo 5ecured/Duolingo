@@ -1,5 +1,7 @@
 import React from 'react'
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
+import ImageOption from './src/components/ImageOption/ImageOption'
+
 
 const App = () => {
   return (
@@ -7,16 +9,10 @@ const App = () => {
       <Text style={styles.title}>Which of these is the "glass"?</Text>
 
       <View style={styles.optionsContainer}>
-        <View style={styles.optionContainer}>
-          <Image
-            source={{ uri: 'https://fsmd-assets.s3.eu-west-1.amazonaws.com/duolingo/images/cup.png' }}
-            style={styles.optionImage}
-            resizeMode='contain'
-          />
-          <Text style={styles.optionText}>Glass</Text>
-        </View>
-
-
+        <ImageOption />
+        <ImageOption />
+        <ImageOption />
+        <ImageOption />
       </View>
 
     </View>
@@ -45,23 +41,6 @@ const styles = StyleSheet.create({
     //because we have flexWrap, we hvae to use alignContent for the vertical gap between options
     alignContent: 'space-between'
   },
-  optionContainer: {
-    borderWidth: 2,
-    borderBottomWidth: 4,
-    borderColor: 'lightgrey',
-    borderRadius: 10,
-    width: '48%',
-    height: '48%',
-    alignItems: 'center',
-    padding: 10
-  },
-  optionImage: {
-    width: '100%',
-    flex: 1,
-  },
-  optionText: {
-
-  }
 })
 
 export default App
