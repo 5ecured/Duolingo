@@ -1,17 +1,21 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
 import styles from './styles'
 
-const ImageOption = () => {
+
+const ImageOption = ({ image, text, isSelected, onPress }) => {
     return (
-        <View style={styles.optionContainer}>
+        <Pressable
+            style={[styles.optionContainer, isSelected ? styles.selectedContainer : {}]}
+            onPress={onPress}
+        >
             <Image
-                source={{ uri: 'https://fsmd-assets.s3.eu-west-1.amazonaws.com/duolingo/images/cup.png' }}
+                source={{ uri: image }}
                 style={styles.optionImage}
                 resizeMode='contain'
             />
-            <Text style={styles.optionText}>Glass</Text>
-        </View>
+            <Text style={isSelected ? styles.selectedText : styles.optionText}>{text}</Text>
+        </Pressable>
     )
 }
 
