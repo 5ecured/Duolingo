@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         fontSize: 18,
+    },
+    fullContainer: {
+        width: '100%',
+        height: '100%'
     }
 })
 
