@@ -4,17 +4,15 @@ import ImageOption from '../ImageOption/ImageOption'
 import Button from '../Button/Button'
 import styles from './styles'
 
-const ImageMultipleChoiceQuestion = ({ question }) => {
+const ImageMultipleChoiceQuestion = ({ question, onCorrect, onWrong }) => {
     const [selected, setSelected] = useState(null)
-
 
     const onButtonPress = () => {
         if (selected.correct) {
-            // Alert.alert('Correct!')
-            // setCurrentQuestionIndex(currentQuestionIndex + 1)
+            onCorrect()
             setSelected(null)
         } else {
-            Alert.alert('Incorrect!')
+            onWrong()
         }
     }
 
