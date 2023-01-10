@@ -9,6 +9,7 @@ import questions from './assets/data/allQuestions'
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(questions[currentQuestionIndex])
+  const [lives, setLives] = useState(5)
 
   useEffect(() => {
     if (currentQuestionIndex >= questions.length) {
@@ -23,22 +24,39 @@ const App = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1)
   }
 
+  const restart = () => {
+    setLives(5)
+    setCurrentQuestionIndex(0)
+  }
+
   const onWrong = () => {
-    Alert.alert('Incorrect')
+    if (lives <= 1) {
+      Alert.alert('Game over', 'Try again', [
+        {
+          text: 'Restart game',
+          onPress: restart
+        }
+      ])
+    } else {
+      Alert.alert('Incorrect')
+      setLives(lives - 1)
+    }
   }
 
 
   return (
     <View style={styles.root}>
-      <Header progress={currentQuestionIndex / questions.length} />
+      <Header progress={currentQuestionIndex / questions.length} lives={lives} />
 
-      {currentQuestion.type === 'IMAGE_MULTIPLE_CHOICE' && (
-        <ImageMultipleChoiceQuestion
-          question={currentQuestion}
-          onCorrect={onCorrect}
-          onWrong={onWrong}
-        />
-      )}
+      {
+        currentQuestion.type === 'IMAGE_MULTIPLE_CHOICE' && (
+          <ImageMultipleChoiceQuestion
+            question={currentQuestion}
+            onCorrect={onCorrect}
+            onWrong={onWrong}
+          />
+        )
+      }
 
       {currentQuestion.type === 'OPEN_ENDED' && (
         <OpenEndedQuestion
