@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Alert } from 'react-native'
+import { View, StyleSheet, Alert, ActivityIndicator } from 'react-native'
 import ImageMultipleChoiceQuestion from './src/components/ImageMultipleChoiceQuestion/ImageMultipleChoiceQuestion'
 import OpenEndedQuestion from './src/components/OpenEndedQuestion/OpenEndedQuestion'
 import Header from './src/components/Header/Header'
 import questions from './assets/data/allQuestions'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(questions[currentQuestionIndex])
   const [lives, setLives] = useState(5)
+  const [hasLoaded, setHasLoaded] = useState(false)
 
   useEffect(() => {
     if (currentQuestionIndex >= questions.length) {
@@ -19,6 +21,16 @@ const App = () => {
       setCurrentQuestion(questions[currentQuestionIndex])
     }
   }, [currentQuestionIndex])
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  useEffect(() => {
+    if (hasLoaded) {
+      saveData()
+    }
+  }, [currentQuestionIndex, lives, hasLoaded])
 
   const onCorrect = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1)
@@ -43,10 +55,42 @@ const App = () => {
     }
   }
 
+  const saveData = async () => {
+    try {
+      await AsyncStorage.setItem('lives', JSON.stringify(lives))
+      await AsyncStorage.setItem('currentQuestionIndex', JSON.stringify(currentQuestionIndex))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const loadData = async () => {
+    try {
+      const loadedLives = await AsyncStorage.getItem('lives')
+      if (loadedLives) {
+        setLives(JSON.parse(loadedLives))
+      }
+
+      const currentQuestionIndex = await AsyncStorage.getItem('currentQuestionIndex')
+      if (currentQuestionIndex) {
+        setCurrentQuestionIndex(JSON.parse(currentQuestionIndex))
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    setHasLoaded(true)
+  }
+
+  if (!hasLoaded) {
+    return <ActivityIndicator />
+  } else {
+
+  }
 
   return (
     <View style={styles.root}>
-      <Header progress={currentQuestionIndex / questions.length} lives={lives} />
+      <Header progress={currentQuestionIndex / questions.length} lives={lives} restart={restart} />
 
       {
         currentQuestion.type === 'IMAGE_MULTIPLE_CHOICE' && (
