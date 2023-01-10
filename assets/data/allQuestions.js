@@ -23,14 +23,28 @@ export default [
   //   options: ["la", "el", "nina", "nino", "ella"],
   // },
   {
-    id: 'q0',
+    id: 'q1',
     type: 'FILL_IN_THE_BLANK',
-    text: 'una nina, una',
-    options: ['yo', 'la', 'mujer', 'el'],
-    correct: 'mujer'
+    parts: [
+      {
+        text: 'la',
+        isBlank: true
+      },
+      {
+        text: 'nino'
+      },
+      {
+        text: 'el',
+        isBlank: true
+      },
+      {
+        text: 'nina',
+      }
+    ],
+    options: ['la', 'el', 'mujer', 'ella'],
   },
   {
-    id: "q1",
+    id: "q2",
     type: "IMAGE_MULTIPLE_CHOICE",
     question: 'Which of these is "the glass"?',
     options: [
@@ -62,13 +76,13 @@ export default [
     ],
   },
   {
-    id: "q2",
+    id: "q3",
     type: "OPEN_ENDED",
     text: "Yo soy un hombre",
     answer: "I am a man",
   },
   {
-    id: "q3",
+    id: "q4",
     type: "IMAGE_MULTIPLE_CHOICE",
     question: 'Which of these is "the coffee"?',
     options: [
@@ -100,14 +114,14 @@ export default [
     ],
   },
   {
-    id: "q4",
+    id: "q5",
     type: "IMAGE_MULTIPLE_CHOICE",
     type: "OPEN_ENDED",
     text: "La mujer",
     answer: "the woman",
   },
   {
-    id: "q3",
+    id: "q6",
     question: 'Which of these is "the cup"?',
     type: "IMAGE_MULTIPLE_CHOICE",
     options: [
@@ -139,13 +153,13 @@ export default [
     ],
   },
   {
-    id: "q5",
+    id: "q7",
     type: "OPEN_ENDED",
     text: "Me gusta React Native",
     answer: "I like react native",
   },
   {
-    id: "q6",
+    id: "q8",
     type: "IMAGE_MULTIPLE_CHOICE",
     question: 'Which of these is "the milk"?',
     options: [

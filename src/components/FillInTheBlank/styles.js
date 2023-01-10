@@ -10,12 +10,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'flex-start',
         marginVertical: 10,
-        height: 80
+        height: 80,
     },
     blank: {
         borderBottomWidth: 2,
         borderColor: 'lightgrey',
-        width: 100
+        width: 150,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
     },
     optionsContainer: {
         flex: 1,
