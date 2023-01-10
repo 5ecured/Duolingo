@@ -5,6 +5,7 @@ import OpenEndedQuestion from './src/components/OpenEndedQuestion/OpenEndedQuest
 import Header from './src/components/Header/Header'
 import questions from './assets/data/allQuestions'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import FillInTheBlank from './src/components/FillInTheBlank/FillInTheBlank'
 
 
 const App = () => {
@@ -98,6 +99,14 @@ const App = () => {
         currentQuestion={currentQuestionIndex}
         totalQuestions={questions.length}
       />
+
+      {currentQuestion.type === 'FILL_IN_THE_BLANK' && (
+        <FillInTheBlank
+          question={currentQuestion}
+          onCorrect={onCorrect}
+          onWrong={onWrong}
+        />
+      )}
 
       {currentQuestion.type === 'IMAGE_MULTIPLE_CHOICE' && (
         <ImageMultipleChoiceQuestion
