@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
         color: 'red',
         fontWeight: 'bold',
         fontSize: 20
+    },
+    question: {
+        marginRight: 15,
+        fontWeight: 'bold',
+        fontSize: 20
     }
 })
 

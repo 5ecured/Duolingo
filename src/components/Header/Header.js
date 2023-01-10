@@ -4,9 +4,10 @@ import styles from './styles'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import heart from '../../../assets/images/heart.png'
 
-const Header = ({ progress, lives, restart }) => {
+const Header = ({ progress, lives, restart, currentQuestion, totalQuestions }) => {
     return (
         <View style={styles.root}>
+            <Text style={styles.question}>{currentQuestion}/{totalQuestions}</Text>
             <ProgressBar progress={progress} />
             <Image source={heart} style={styles.icon} resizeMode='contain' />
             <Text style={styles.lives}>{lives}</Text>

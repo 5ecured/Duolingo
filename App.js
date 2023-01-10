@@ -49,6 +49,9 @@ const App = () => {
           onPress: restart
         }
       ])
+    } else if (lives === 2) {
+      Alert.alert('Incorrect', 'Careful, you only have 1 life left')
+      setLives(lives - 1)
     } else {
       Alert.alert('Incorrect')
       setLives(lives - 1)
@@ -84,23 +87,25 @@ const App = () => {
 
   if (!hasLoaded) {
     return <ActivityIndicator />
-  } else {
-
   }
 
   return (
     <View style={styles.root}>
-      <Header progress={currentQuestionIndex / questions.length} lives={lives} restart={restart} />
+      <Header
+        progress={currentQuestionIndex / questions.length}
+        lives={lives}
+        restart={restart}
+        currentQuestion={currentQuestionIndex}
+        totalQuestions={questions.length}
+      />
 
-      {
-        currentQuestion.type === 'IMAGE_MULTIPLE_CHOICE' && (
-          <ImageMultipleChoiceQuestion
-            question={currentQuestion}
-            onCorrect={onCorrect}
-            onWrong={onWrong}
-          />
-        )
-      }
+      {currentQuestion.type === 'IMAGE_MULTIPLE_CHOICE' && (
+        <ImageMultipleChoiceQuestion
+          question={currentQuestion}
+          onCorrect={onCorrect}
+          onWrong={onWrong}
+        />
+      )}
 
       {currentQuestion.type === 'OPEN_ENDED' && (
         <OpenEndedQuestion
